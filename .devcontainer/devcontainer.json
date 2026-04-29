@@ -11,11 +11,11 @@
         "ms-python.vscode-pylance",
         "gerane.theme-dark-dracula",
         "ms-python.black-formatter",
-        "ms-python.flake8",
         "srmeyers.git-prefix",
         "eamodio.gitlens",
         "ms-toolsai.jupyter",
-        "pkief.material-icon-theme"
+        "pkief.material-icon-theme",
+        "charliermarsh.ruff"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python"

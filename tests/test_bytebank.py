@@ -1,9 +1,10 @@
+from pytest import fixture, mark, raises
+
 from bytebank import Funcionario
-import pytest
 
 
 class TestFuncionario:
-    @pytest.fixture
+    @fixture
     def funcionario(self) -> Funcionario:
         nome = 'John Doe'
         data_nascimento = '01/10/1995'
@@ -46,7 +47,8 @@ class TestFuncionario:
         nivel = 'Diretor'
 
         # act
-        funcionario = Funcionario(nome=nome, data_nascimento=data_nascimento, salario=salario, nivel=nivel)
+        funcionario = Funcionario(
+            nome=nome, data_nascimento=data_nascimento, salario=salario, nivel=nivel)
         resultado = funcionario.idade()
 
         # Then
@@ -60,12 +62,28 @@ class TestFuncionario:
         salario = 10000.0
         nivel = 'Diretor'
 
-        # arrenge - output
+        # arrange - output
         expected = 'Doe'
 
         # act
-        funcionario = Funcionario(nome=nome, data_nascimento=data_nascimento, salario=salario, nivel=nivel)
+        funcionario = Funcionario(
+            nome=nome, data_nascimento=data_nascimento, salario=salario, nivel=nivel)
         result = funcionario.retornar_sobrenome()
 
         # assert
         assert result == expected
+
+    @mark.calcular_bonus
+    def teste_quando_calcular_bonus_recebe_1000000_deve_retornar_exception(self):
+        with raises(Exception):
+            # arrange
+            salario = 1000000  # entrada
+
+            # act
+            funcionario = Funcionario(
+                nome='John Doe', data_nascimento='15/06/1992', salario=salario, nivel='Senior'
+            )
+            resultado = funcionario.calcular_bonus()
+
+            # assert
+            assert resultado
